@@ -18,7 +18,7 @@ export default function AboutPage() {
       <ul style={styles.list}>
         <li><strong>⚡ Real-Time Conversion:</strong> Instantly see numbers transformed across different bases.</li>
         <li><strong>💡 Intuitive Interface:</strong> User-friendly design that makes number conversions seamless.</li>
-        <li><strong>🔢 Custom Base Selection:</strong> Change number bases from 2 to 36 with ease.</li>
+        <li><strong>📊 Graphical Represenration:</strong> Showcase the values on the graph and see the differences</li>
         <li><strong>🎮 Interactive Controls:</strong> Adjust values using increment & decrement buttons.</li>
       </ul>
 
@@ -29,6 +29,7 @@ export default function AboutPage() {
         <li><strong>Decimal:</strong> The system we use in everyday life, based on **10 digits (0-9).**</li>
         <li><strong>Hexadecimal:</strong> Often used in programming, where **A-F** represent values from 10 to 15.</li>
         <li><strong>Octal:</strong> A system that uses digits **0-7** and was historically used in computing.</li>
+        <li><string>Roman:</string>A system that doesn't have a number 0 since Romans didn't know how to represent nothing.</li>
       </ul>
 
      

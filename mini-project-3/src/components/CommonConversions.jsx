@@ -15,7 +15,7 @@ function CommonConversions({ savedCards }) {
     const conversionCounts = {};
 
     savedCards.forEach((card) => {
-      const key = `${card.input} → ${card.decimal}, ${card.binary}, ${card.octal}, ${card.hexadecimal}`;
+      const key = `${card.input} → ${card.decimal}, ${card.binary}, ${card.octal}, ${card.hexadecimal} ${card.romanNumeral}`;
       conversionCounts[key] = (conversionCounts[key] || 0) + 1;
     });
 

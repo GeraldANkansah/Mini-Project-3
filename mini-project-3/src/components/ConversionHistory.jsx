@@ -21,42 +21,50 @@ const ConversionHistory = () => {
     fetchHistory();
   }, []);
 
+  const romanToInt = (roman) => {
+    const romanMap = {I:1, V:5, X:10, L:50, C:100, D:500, M:1000};
+    let num = 0;
+    for (let i = 0; i < roman.length; i++) {
+      if (romanMap[roman[i]] < romanMap[roman[i + 1]]) {
+        num -= romanMap[roman[i]];
+      } else {
+        num += romanMap[roman[i]];
+      }
+    }
+    return num;
+  };
+
   const chartData = {
     labels: history.map((entry, index) => `Conversion ${index + 1}`),
     datasets: [
       {
-        label: "Decimal",
-        data: history.map((entry) => parseInt(entry.input, 10)), 
+        label: "Number Conversions",
+        data: history.map((entry) => parseInt(entry.decimal, 10)),
         borderColor: "blue",
         borderWidth: 2,
         fill: false,
         pointBackgroundColor: "blue",
-      },
-      {
-        label: "Binary",
-        data: history.map((entry) => parseInt(entry.input, 10)), 
-        borderColor: "green",
-        borderWidth: 2,
-        fill: false,
-        pointBackgroundColor: "green",
-      },
-      {
-        label: "Hexadecimal",
-        data: history.map((entry) => parseInt(entry.input, 10)), 
-        borderColor: "red",
-        borderWidth: 2,
-        fill: false,
-        pointBackgroundColor: "red",
-      },
-      {
-        label: "Octal",
-        data: history.map((entry) => parseInt(entry.input, 10)), 
-        borderColor: "orange",
-        borderWidth: 2,
-        fill: false,
-        pointBackgroundColor: "orange",
-      },
+      }
     ],
+  };
+
+  const chartOptions = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const entry = history[context.dataIndex];
+            return [
+              `Decimal: ${entry.decimal}`,
+              `Binary: ${entry.binary}`,
+              `Hexadecimal: ${entry.hexadecimal}`,
+              `Octal: ${entry.octal}`,
+              `Roman Numeral: ${entry.romanNumeral}`,
+            ];
+          },
+        },
+      },
+    },
   };
 
   return (
@@ -65,9 +73,8 @@ const ConversionHistory = () => {
       {history.length === 0 ? (
         <p>No conversions yet.</p>
       ) : (
-        <Line data={chartData} />
+        <Line data={chartData} options={chartOptions} />
       )}
-
       
       <button style={styles.backButton} onClick={() => navigate("/converter")}>
         Back to Conversion

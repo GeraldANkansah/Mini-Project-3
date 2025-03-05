@@ -22,7 +22,7 @@ function Homepage() {
           <h2 style={styles.heading}>What is this Keypad?</h2>
           <p style={styles.text}>
             The Digital Keypad allows you to convert numbers across various bases, including binary, 
-            octal, decimal, and hexadecimal. This tool is ideal for students, programmers, and tech 
+            octal, decimal, Roman and hexadecimal. This tool is ideal for students, programmers, and tech 
             enthusiasts. You can even enter multiple numbers!
           </p>
           <h3 style={styles.subheading}>Key Features:</h3>
@@ -33,7 +33,7 @@ function Homepage() {
           </ul>
         </div>
 
-        {/* Demo Section */}
+
         <div style={styles.card}>
           <h2 style={styles.heading}>Try a quick demo!</h2>
           <p style={styles.text}>Press this button in order to try out a demo!:</p>

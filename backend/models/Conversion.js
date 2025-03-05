@@ -1,3 +1,4 @@
+// Conversion.js
 const mongoose = require("mongoose");
 
 const conversionSchema = new mongoose.Schema({
@@ -11,7 +12,7 @@ const conversionSchema = new mongoose.Schema({
   octal: { type: String, required: true },
   hexadecimal: { type: String, required: true },
   decimal: { type: String, required: true },
-  customBase: { type: String, required: false, default: "N/A" },
+  romanNumeral: { type: String, required: true }, 
   createdAt: { type: Date, default: Date.now }
 });
 

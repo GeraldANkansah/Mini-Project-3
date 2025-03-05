@@ -1,29 +1,41 @@
+// controllerConverter.js
 const Conversion = require("../models/Conversion");
+
+// Function to convert number to Roman Numerals
+const toRoman = (num) => {
+  const romanMap = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1};
+  let result = "";
+  for (let key in romanMap) {
+    while (num >= romanMap[key]) {
+      result += key;
+      num -= romanMap[key];
+    }
+  }
+  return result;
+};
 
 const saveConversion = async (req, res) => {
   try {
-    const { input, customBase } = req.body; // Expecting only input and custom base
-
-    // Validate the input number
+    const { input, customBase } = req.body;
     const num = parseInt(input);
-    if (isNaN(num)) {
-      return res.status(400).json({ message: "Invalid number input" });
+    if (isNaN(num) || num <= 0 || num > 3999) {
+      return res.status(400).json({ message: "Invalid number input (1-3999 supported for Roman Numerals)" });
     }
 
-    // Convert input to different bases
     const binary = num.toString(2);
     const octal = num.toString(8);
     const hexadecimal = num.toString(16).toUpperCase();
     const decimal = num.toString(10);
+    const romanNumeral = toRoman(num);
     const customBaseValue = customBase ? num.toString(customBase) : "N/A";
 
-    // Create and save new conversion
     const newConversion = new Conversion({
       input,
       binary,
       octal,
       hexadecimal,
       decimal,
+      romanNumeral,
       customBase: customBaseValue,
     });
 
@@ -34,7 +46,6 @@ const saveConversion = async (req, res) => {
   }
 };
 
-// Get all saved conversions
 const getConversions = async (req, res) => {
   try {
     const conversions = await Conversion.find();
@@ -44,7 +55,6 @@ const getConversions = async (req, res) => {
   }
 };
 
-// Delete a conversion by ID
 const deleteConversion = async (req, res) => {
   try {
     const { id } = req.params;
